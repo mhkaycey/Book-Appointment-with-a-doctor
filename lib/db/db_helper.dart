@@ -43,7 +43,7 @@ class DBHelper {
       throw Exception('Database has not been initialized');
     }
 
-    return _database!.query(_tableName);
+    return _database!.query(_tableName, orderBy: 'id DESC');
   }
 
   static Future<List<Map<String, dynamic>>> queryCompleted() async {

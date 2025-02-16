@@ -12,32 +12,32 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  List<Slide> slides = [];
+  List<ContentConfig> slides = [];
 
   @override
   void initState() {
     slides.add(
-      Slide(
+      const ContentConfig(
         title: "",
         description: "We are here to serve and help have a good life ",
         pathImage: "assets/images/doctor.png",
-        backgroundColor: const Color(0xff9932CC),
+        backgroundColor: Color(0xff9932CC),
       ),
     );
     slides.add(
-      Slide(
+      const ContentConfig(
           title: "Chat",
           description: "We are here to serve and help have a good life ",
           pathImage: "assets/images/doctors.jpg",
           backgroundColor: Colors.red),
     );
     slides.add(
-      Slide(
+      const ContentConfig(
         title: "Emergency",
         description:
             "We are here to serve and help have a good life, We are here to serve and help have a good life",
         pathImage: "assets/images/doctor.png",
-        backgroundColor: const Color(0xff9932CC),
+        backgroundColor: Color(0xff9932CC),
       ),
     );
 
@@ -47,7 +47,7 @@ class _IntroScreenState extends State<IntroScreen> {
   List<Widget> renderListCustomTab() {
     List<Widget> tabs = [];
     for (int i = 0; i < slides.length; i++) {
-      Slide currentSlide = slides[i];
+      ContentConfig currentSlide = slides[i];
       tabs.add(
         SizedBox(
           width: double.infinity,
@@ -99,16 +99,16 @@ class _IntroScreenState extends State<IntroScreen> {
     return Center(
       child: IntroSlider(
           // slides: slides,
-          backgroundColorAllSlides: Colors.green[700],
+          backgroundColorAllTabs: Colors.green[700],
           // renderSkipBtn: const Text("Skip"),
           // renderNextBtn: const Text("Next"),
           // renderDoneBtn: const Text("Done"),
           // renderPrevBtn: const Text("Prev"),
-          colorActiveDot: Colors.white,
-          colorDot: Colors.black,
-          showDoneBtn: true,
+          // colorActiveDot: Colors.white,
+          // colorDot: Colors.black,
+          // showDoneBtn: true,
           // showPrevBtn: true,
-          showSkipBtn: true,
+          // showSkipBtn: true,
           skipButtonStyle: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
             foregroundColor: Colors.white,
@@ -130,10 +130,10 @@ class _IntroScreenState extends State<IntroScreen> {
               borderRadius: BorderRadius.circular(15),
             ),
           ),
-          sizeDot: 10,
-          typeDotAnimation: DotSliderAnimation.SIZE_TRANSITION,
+          // sizeDot: 10,
+          // typeDotAnimation: DotSliderAnimation.SIZE_TRANSITION,
           listCustomTabs: renderListCustomTab(),
-          scrollPhysics: const BouncingScrollPhysics(),
+          //scrollPhysics: const BouncingScrollPhysics(),
           onDonePress: () => Get.to(
                 () => const IndexPage(),
               )

@@ -1,4 +1,3 @@
-import 'package:doctor_app/controllers/appoint_ctlr.dart';
 import 'package:doctor_app/controllers/history_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,10 +19,10 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: SafeArea(
         child: Column(
-          children: const [
+          children: [
             // Expanded(
             //   child: Obx(
             //     () => ListView.builder(

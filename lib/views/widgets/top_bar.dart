@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 class TopBar extends StatelessWidget {
   final Widget? title;
   const TopBar({
-    Key? key,
+    super.key,
     this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class TopBar extends StatelessWidget {
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(IconlyBold.arrowLeftSquare),
+          icon: const Icon(IconlyBold.arrowLeftSquare, size: 30),
         ),
         const Spacer(),
         title == null
@@ -29,15 +29,12 @@ class TopBar extends StatelessWidget {
         const Spacer(),
         IconButton(
           onPressed: () {
-            Get.to(() => const IndexPage());
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => const IndexPage(),
-            //   ),
-            // );
+            Get.offAll(() => const IndexPage());
           },
-          icon: const Icon(IconlyBold.home),
+          icon: const Icon(
+            IconlyBold.home,
+            size: 25,
+          ),
         ),
       ],
     );

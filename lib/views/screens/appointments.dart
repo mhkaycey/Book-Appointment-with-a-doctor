@@ -5,9 +5,11 @@ import 'package:doctor_app/models/appoint.dart';
 import 'package:doctor_app/services/notification.dart';
 import 'package:doctor_app/views/widgets/appointmentTiles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 
 class AppointmentPage extends StatefulWidget {
   const AppointmentPage({super.key});
@@ -57,9 +59,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
             dateBooking(context),
             topDate(),
 
-            const SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5),
             _showAppointment(),
           ],
         ),
@@ -76,7 +76,7 @@ class _AppointmentPageState extends State<AppointmentPage> {
       ),
       child: DatePicker(
         DateTime.now(),
-        height: 80,
+        height: 90,
         // width: 100,
         controller: _controller,
         initialSelectedDate: DateTime.now(),
@@ -91,7 +91,6 @@ class _AppointmentPageState extends State<AppointmentPage> {
           // New date selected
           setState(() {
             selectedValue = date;
-            // print(DateFormat("EEE, d-MMM-yyyy").format(selectedValue));
           });
         },
       ),
@@ -117,30 +116,30 @@ class _AppointmentPageState extends State<AppointmentPage> {
               ),
             ],
           ),
-          // ElevatedButton.icon(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       PageTransition(
-          //         child: const AppointmentPage(),
-          //         childCurrent: widget,
-          //         type: PageTransitionType.topToBottomJoined,
-          //       ),
-          //     );
-          //   },
-          //   icon: const Icon(IconlyBroken.plus),
-          //   label: Text(
-          //     "Book",
-          //     style: textStyle,
-          //   ),
-          //   style: ElevatedButton.styleFrom(
-          //     elevation: 0,
-          //     backgroundColor: Colors.green.shade200,
-          //     shape: RoundedRectangleBorder(
-          //       borderRadius: BorderRadius.circular(10),
-          //     ),
-          //   ),
-          // ),
+          ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageTransition(
+                  child: const AppointmentPage(),
+                  childCurrent: widget,
+                  type: PageTransitionType.topToBottomJoined,
+                ),
+              );
+            },
+            icon: const Icon(IconlyBroken.plus),
+            label: Text(
+              "Book",
+              style: textStyleSmall,
+            ),
+            style: ElevatedButton.styleFrom(
+              elevation: 0,
+              backgroundColor: Colors.green.shade200,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -154,19 +153,6 @@ class _AppointmentPageState extends State<AppointmentPage> {
           itemCount: appCtlr.appointmentList.length,
           itemBuilder: (_, index) {
             BookAppointment appointmentList = appCtlr.appointmentList[index];
-            //  print(appointmentList.toJson());
-
-            // if (appointmentList.date ==
-            //     DateFormat.yMd().format(selectedValue)) {
-            //   DateTime dateTime =
-            //       DateFormat.jm().parse(appointmentList.startTime.toString());
-            //   var myTime = DateFormat("HH:mm").format(dateTime);
-            //   print(myTime);
-            //   notifyHelper.scheduledNotification(
-            //     int.parse(myTime.toString().split(":")[0]),
-            //     int.parse(myTime.toString().split(":")[1]),
-            //     appointmentList,
-            //   );
 
             return AnimationConfiguration.staggeredList(
               position: index,
@@ -197,7 +183,10 @@ class _AppointmentPageState extends State<AppointmentPage> {
   void _showBottomBar(BuildContext context, BookAppointment bookAppointment) {
     Get.bottomSheet(
       Container(
-        padding: const EdgeInsets.only(top: 4),
+        width: double.infinity,
+        padding: const EdgeInsets.only(
+          top: 4,
+        ),
         height: bookAppointment.isCompleted == 1
             ? MediaQuery.of(context).size.height * 0.24
             : MediaQuery.of(context).size.height * 0.32,
@@ -269,8 +258,8 @@ class _AppointmentPageState extends State<AppointmentPage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 4),
-        height: 45,
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 20),
+        height: MediaQuery.of(context).size.width * 0.45,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: isClosed == true ? Colors.transparent : clr,

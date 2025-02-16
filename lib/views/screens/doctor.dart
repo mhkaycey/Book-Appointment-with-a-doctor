@@ -31,7 +31,10 @@ class DoctorList extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(IconlyBold.arrowLeftSquare),
+                      icon: const Icon(
+                        IconlyBold.arrowLeftSquare,
+                        size: 30,
+                      ),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -56,22 +59,15 @@ class DoctorList extends StatelessWidget {
                         return GestureDetector(
                           onTap: () {
                             Get.to(
+                              // curve: Curves.decelerate,
+                              duration: const Duration(milliseconds: 200),
+                              transition: Transition.leftToRight,
                               () => DoctorsDetails(
                                 selectedDoctor: filteredDoctors[index],
                                 heroTag:
                                     'doctorHeroTag${filteredDoctors[index].name}$index',
                               ),
                             );
-                            // Navigator.push(
-                            //   context,
-                            //   PageTransition(
-                            //     child: const DoctorsDetails(),
-                            //     //childCurrent: this,
-                            //     type: PageTransitionType.fade,
-                            //     // curve: Curves.easeIn,
-                            //     // duration: Duration(milliseconds: 1000),
-                            //   ),
-                            // );
                           },
                           child: Card(
                             child: ListTile(

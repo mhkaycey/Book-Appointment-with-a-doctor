@@ -52,33 +52,52 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.white,
                       image: const AssetImage("assets/images/doctor.png"),
                     ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Welcome,",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey[700],
+                                fontFamily: ''),
+                          ),
+                          Text(
+                            "Mark Henry",
+                            style: GoogleFonts.acme(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ),
                     const Spacer(),
                     const Icon(
                       CupertinoIcons.bell,
-                      size: 30,
+                      size: 25,
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Welcome,",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.grey[700],
-                          fontFamily: ''),
-                    ),
-                    Text(
-                      "Mark Henry",
-                      style: GoogleFonts.acme(fontSize: 30),
-                    ),
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         "Welcome,",
+              //         style: TextStyle(
+              //             fontSize: 20,
+              //             color: Colors.grey[700],
+              //             fontFamily: ''),
+              //       ),
+              //       Text(
+              //         "Mark Henry",
+              //         style: GoogleFonts.acme(fontSize: 30),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(
@@ -95,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
-                                Radius.circular(50),
+                                Radius.circular(10),
                               ),
                               borderSide: BorderSide(color: Colors.white),
                             ),
@@ -265,23 +284,12 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 transition: Transition.zoom,
                                 duration: const Duration(
-                                  milliseconds: 600,
+                                  milliseconds: 200,
                                 ),
                               );
-                              // Navigator.push(
-                              //   context,
-                              //   PageTransition(
-                              //     child: DoctorList(
-                              //       speciality: speciality,
-                              //       index: index,
-                              //     ),
-                              //     type: PageTransitionType.fade,
-                              //     duration: const Duration(milliseconds: 1000),
-                              //   ),
-                              // );
                             },
                             child: Card(
-                              elevation: 1,
+                              elevation: 0,
                               shape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(15),

@@ -1,37 +1,43 @@
 // import 'package:flutter/cupertino.dart';
 
+import 'dart:developer';
+
+import 'package:doctor_app/controllers/utili.dart';
 import 'package:doctor_app/models/appoint.dart';
 import 'package:doctor_app/views/screens/notified.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
+// import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:get/get.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 
 class NotifyHelper {
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin(); //
+      FlutterLocalNotificationsPlugin();
 
   initializeNotification() async {
     _configureLocalTimeZone();
     // this is for latest iOS settings
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
-            requestSoundPermission: false,
-            requestBadgePermission: false,
-            requestAlertPermission: false,
-            onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+    // final IOSInitializationSettings initializationSettingsIOS =
+    //     IOSInitializationSettings(
+    //         requestSoundPermission: false,
+    //         requestBadgePermission: false,
+    //         requestAlertPermission: false,
+    //         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
 
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('appicon');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final InitializationSettings initializationSettings =
+    const InitializationSettings initializationSettings =
         InitializationSettings(
-            iOS: initializationSettingsIOS,
+            //  iOS: initializationSettingsIOS,
             android: initializationSettingsAndroid);
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: selectNotification);
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationSettings,
+      //  /   onSelectNotification: selectNotification,
+    );
   }
 
   void requestIOSPermissions() {
@@ -45,7 +51,10 @@ class NotifyHelper {
         );
   }
 
-  displayNotification({required String title, required String body}) async {
+  displayNotification({
+    required String title,
+    required String body,
+  }) async {
     //print("doing test");
 
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
@@ -55,12 +64,13 @@ class NotifyHelper {
       importance: Importance.max,
       priority: Priority.high,
     );
-    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
+    // var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics,
-        iOS: iOSPlatformChannelSpecifics);
+      android: androidPlatformChannelSpecifics,
+      // iOS: iOSPlatformChannelSpecifics,
+    );
     await flutterLocalNotificationsPlugin.show(
-      0,
+      int.parse(Utils.uniqueRefenece()),
       title,
       body,
       platformChannelSpecifics,
@@ -68,9 +78,12 @@ class NotifyHelper {
     );
   }
 
-  scheduledNotification(
-      int hour, int minutes, BookAppointment bookAppointment) async {
-    print("schedule");
+  scheduledNotification({
+    required int hour,
+    required int minutes,
+    required BookAppointment bookAppointment,
+  }) async {
+    log("schedule");
     await flutterLocalNotificationsPlugin.zonedSchedule(
         bookAppointment.id!.toInt(),
         bookAppointment.title.toString(),
@@ -84,7 +97,7 @@ class NotifyHelper {
             channelDescription: 'your channel description',
           ),
         ),
-        androidAllowWhileIdle: true,
+        androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime,
         matchDateTimeComponents: DateTimeComponents.time,
@@ -122,9 +135,9 @@ class NotifyHelper {
 
   Future selectNotification(String? payload) async {
     if (payload != null) {
-      print('notification payload: $payload');
+      log('notification payload: $payload');
     } else {
-      print("Notification Done");
+      log("Notification Done");
     }
     if (payload == "Book Appointment") {
     } else {
@@ -142,15 +155,15 @@ class NotifyHelper {
       hour,
       minutes,
     );
-    if (scheduleDate.isBefore(now)) {
-      scheduleDate = scheduleDate.add(const Duration(days: 1));
-    }
+    // if (scheduleDate.isBefore(now)) {
+    //   scheduleDate = scheduleDate.add(const Duration(days: 1));
+    // }
     return scheduleDate;
   }
 
   _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    String timeZone = await FlutterNativeTimezone.getLocalTimezone();
+    String timeZone = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZone));
   }
 }

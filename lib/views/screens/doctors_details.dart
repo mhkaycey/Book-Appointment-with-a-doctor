@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:doctor_app/constant/konst.dart';
 import 'package:doctor_app/models/doctor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -14,10 +15,10 @@ class DoctorsDetails extends StatelessWidget {
   final String heroTag;
 
   const DoctorsDetails({
-    Key? key,
+    super.key,
     required this.selectedDoctor,
     required this.heroTag,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -129,12 +130,18 @@ class DoctorsDetails extends StatelessWidget {
                                 ),
                               ),
                               RichText(
-                                text: const TextSpan(
+                                text: TextSpan(
                                   text:
-                                      "Dr. Wellbeing is a nigeria born doctor school and trained in Ukraine, having worked in the said country he came back to nigeria to help booste nigeria health sector... ",
-                                  style: TextStyle(
-                                      fontSize: 16, color: Colors.black),
-                                  children: [
+                                      "Dr. Wellbeing is a Nigerian born doctor school and trained in Ukraine, having worked in the said country he came back to Nigeria to help booste the health sector... ",
+                                  style: textStyleSmall.copyWith(
+                                      fontSize: 14,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal),
+                                  // TextStyle(
+                                  //   fontSize: 16,
+                                  //   color: Colors.black,
+                                  // ),
+                                  children: const [
                                     TextSpan(
                                       text: "Read more",
                                       style: TextStyle(

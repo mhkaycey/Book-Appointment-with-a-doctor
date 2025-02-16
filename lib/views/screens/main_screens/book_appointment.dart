@@ -29,7 +29,7 @@ class _BookAppointmentsState extends State<BookAppointments> {
   String startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
   int selectedReminder = 5;
   List<int> remindList = [5, 10, 15, 20];
-  var notifyHelper;
+  var notifyHelper = NotifyHelper();
 
   int _selectedColor = 0;
 
@@ -37,7 +37,7 @@ class _BookAppointmentsState extends State<BookAppointments> {
   void initState() {
     super.initState();
     appointmentController.getAppointments();
-    notifyHelper = NotifyHelper();
+    notifyHelper;
     notifyHelper.initializeNotification();
     notifyHelper.requestIOSPermissions();
   }
@@ -269,7 +269,7 @@ class _BookAppointmentsState extends State<BookAppointments> {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2023),
-        lastDate: DateTime(2024));
+        lastDate: DateTime(2026));
     if (datePicker != null) {
       setState(() {
         selectedDate = datePicker;

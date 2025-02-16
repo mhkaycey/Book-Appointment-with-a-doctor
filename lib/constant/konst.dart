@@ -16,6 +16,15 @@ TextStyle get textStyle {
   );
 }
 
+TextStyle get textStyleSmall {
+  return GoogleFonts.lato(
+    textStyle: const TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    ),
+  );
+}
+
 TextStyle get textStyleLight {
   return GoogleFonts.lato(
     textStyle: const TextStyle(

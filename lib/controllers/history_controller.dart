@@ -1,5 +1,6 @@
 import 'package:doctor_app/db/db_helper.dart';
 import 'package:doctor_app/models/appoint.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HistoryController extends GetxController {
@@ -18,6 +19,6 @@ class HistoryController extends GetxController {
     appointmentList.assignAll(
       appointmentData.map((data) => BookAppointment.fromJson(data)).toList(),
     );
-    print("-----$appointmentData----");
+    debugPrint("-----$appointmentData----");
   }
 }
